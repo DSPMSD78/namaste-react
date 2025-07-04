@@ -1,0 +1,32 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "\"Namaste react\"",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DSPMSD78/namaste-react.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "DSPMSD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DSPMSD78/namaste-react/issues"
+  },
+  "homepage": "https://github.com/DSPMSD78/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.15.4"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+  ,
+  "browsersList":[
+    "last 2 versions"
+  ]
+}
