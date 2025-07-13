@@ -35,6 +35,10 @@
 .nav-items > ul > li {
   margin-left: 2.5rem;
 }
+.login {
+  margin-left: 2.5rem;
+  cursor: pointer;
+}
 
 .body {
   position: absolute;
@@ -80,7 +84,8 @@
   width: 100%;
 }
 
-.filter-btn {
+.filter-btn,
+.search-btn {
   margin: 0 2%;
   cursor: pointer;
 }
