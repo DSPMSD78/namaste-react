@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useRestaurantList from "../utils/useRestaurantList";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const list = useRestaurantList();
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
+  const status = useOnlineStatus();
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (list.length > 0) {
+      setFilteredRestaurant(list);
+    }
+  }, [list]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4325894&lng=78.4070691&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    setListOfRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurant(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
+  if (!status) {
+    return <h1>You are offline </h1>;
+  }
 
-  return listOfRestaurants.length === 0 ? (
+  return list.length === 0 ? (
     <Shimmer />
   ) : (
     <div>
@@ -40,7 +36,7 @@ const Body = () => {
           className="search-btn"
           onClick={() => {
             setFilteredRestaurant(
-              listOfRestaurants.filter((res) =>
+              list.filter((res) =>
                 res.info.name
                   .toLowerCase()
                   .includes(searchText.toLocaleLowerCase())
@@ -54,9 +50,7 @@ const Body = () => {
       <button
         className="filter-btn"
         onClick={() => {
-          setFilteredRestaurant(
-            listOfRestaurants.filter((res) => res.info.avgRating > 4.5)
-          );
+          setFilteredRestaurant(list.filter((res) => res.info.avgRating > 4.5));
         }}
       >
         Top listed Restaurants
