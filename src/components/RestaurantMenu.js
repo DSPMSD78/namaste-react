@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
     item?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
   console.log(itemCards);
   return (
-    <div>
+    <div className="p-[2%]">
       <h1>{name}</h1>
       <h4>{costForTwoMessage}</h4>
       <h5>{cuisines.join(", ")}</h5>

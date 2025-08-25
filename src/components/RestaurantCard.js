@@ -11,9 +11,9 @@ const RestaurantCard = (props) => {
     cuisines,
   } = resData?.info;
   return (
-    <div className="res-card">
-      <img className="res-logo" src={CDN_URL + cloudinaryImageId}></img>
-      <div className="res-details">
+    <div className="bg-[#f3f0f0] mx-auto w-[280px] h-88 p-[0.25%] hover:border hover:border-black hover:cursor-pointer">
+      <img className="w-full h-[60%]" src={CDN_URL + cloudinaryImageId}></img>
+      <div className="flex flex-col justify-start items-start gap-[10px] w-full">
         <h4 className="res-name">{name}</h4>
         <h5>
           {avgRatingString} stars ~ {sla.deliveryTime} MINS ~ {costForTwo}

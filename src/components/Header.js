@@ -8,12 +8,12 @@ export const Header = () => {
   const status = useOnlineStatus();
   const [btnNameReact, setBtnNameReact] = useState("Login");
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL}></img>
+    <div className="relative top-0 left-0 w-full py-5 px-10 flex justify-between items-center border border-black">
+      <div className="h-8 w-8">
+        <img className="w-full h-full" src={LOGO_URL}></img>
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex gap-x-10">
           <li>Online status : {status ? "✅" : "🔴"}</li>
           <li>
             <Link to="/">Home</Link>
@@ -29,7 +29,7 @@ export const Header = () => {
           </li>
           <li>Cart</li>
           <button
-            className="login"
+            className="cursor-pointer"
             onClick={() => {
               setBtnNameReact(btnNameReact === "Login" ? "Logout" : "Login");
             }}
