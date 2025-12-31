@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -10,6 +10,9 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
   const status = useOnlineStatus();
+
+  const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
+  console.log(list);
 
   useEffect(() => {
     if (list.length > 0) {
@@ -60,7 +63,11 @@ const Body = () => {
       <div className="grid [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))] gap-[1%] p-[2%] max-w-full mx-auto">
         {filteredRestaurants.map((x) => (
           <Link key={x.info.id} to={"/restaurants/" + x.info.id}>
-            <RestaurantCard resData={x} />
+            {x.info.avgRating > 4.5 ? (
+              <RestaurantCardWithPromotedLabel resData={x} />
+            ) : (
+              <RestaurantCard resData={x} />
+            )}
           </Link>
         ))}
       </div>
