@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { CDN_URL } from "../utils/constants";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
+  const { loggedInUser } = useContext(UserContext);
   const {
     name,
     avgRatingString,
@@ -19,6 +22,7 @@ const RestaurantCard = (props) => {
           {avgRatingString} stars ~ {sla.deliveryTime} MINS ~ {costForTwo}
         </h5>
         <h5>{cuisines.join(", ")}</h5>
+        <h5>User : {loggedInUser}</h5>
       </div>
     </div>
   );
@@ -27,7 +31,7 @@ const RestaurantCard = (props) => {
 export const withPromotedLabel = (RestaurantCard) => {
   return (props) => (
     <div>
-      <lable className="absolute bg-black text-white m-1 p-2">Promoted</lable>
+      <span className="absolute bg-black text-white m-1 p-2">Promoted</span>
       <RestaurantCard {...props} />
     </div>
   );

@@ -5,16 +5,26 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
 import Contact from "./src/components/Contact";
 import Error from "./src/components/Error";
 import RestaurantMenu from "./src/components/RestaurantMenu";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import UserContext from "./src/utils/UserContext";
 
 const Grocery = lazy(() => import("./src/components/Grocery"));
 const About = lazy(() => import("./src/components/About"));
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const data = {
+      userName: "DSPMSD",
+    };
+    setUserName(data.userName);
+  }, []);
   return (
     <div className="app">
-      <Header />
-      <Outlet />
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
     </div>
   );
 };

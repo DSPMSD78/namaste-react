@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useRestaurantList from "../utils/useRestaurantList";
-
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const list = useRestaurantList();
   const [filteredRestaurants, setFilteredRestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
   const status = useOnlineStatus();
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   const RestaurantCardWithPromotedLabel = withPromotedLabel(RestaurantCard);
-  console.log(list);
 
   useEffect(() => {
     if (list.length > 0) {
@@ -43,8 +43,8 @@ const Body = () => {
               list.filter((res) =>
                 res.info.name
                   .toLowerCase()
-                  .includes(searchText.toLocaleLowerCase())
-              )
+                  .includes(searchText.toLocaleLowerCase()),
+              ),
             );
           }}
         >
@@ -59,7 +59,12 @@ const Body = () => {
       >
         Top listed Restaurants
       </button>
-
+      <label>User : </label>
+      <input
+        className="border border-gray-300 px-2"
+        value={loggedInUser}
+        onChange={(e) => setUserName(e.target.value)}
+      />
       <div className="grid [grid-template-columns:repeat(auto-fill,minmax(280px,1fr))] gap-[1%] p-[2%] max-w-full mx-auto">
         {filteredRestaurants.map((x) => (
           <Link key={x.info.id} to={"/restaurants/" + x.info.id}>
