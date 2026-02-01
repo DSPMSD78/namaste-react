@@ -3,12 +3,16 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   let btnName = "Login";
   const status = useOnlineStatus();
   const [btnNameReact, setBtnNameReact] = useState("Login");
   const { loggedInUser } = useContext(UserContext);
+
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="relative top-0 left-0 w-full py-5 px-10 flex justify-between items-center border border-black">
@@ -28,9 +32,9 @@ export const Header = () => {
             <Link to="/contact">Contact us</Link>
           </li>
           <li>
-            <Link to="/grocery">Grocery</Link>
+            <Link to="/cart">Cart - ({cartItems.length} items)</Link>
           </li>
-          <li>Cart</li>
+
           <button
             className="cursor-pointer"
             onClick={() => {
