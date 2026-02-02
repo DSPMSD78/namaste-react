@@ -12,7 +12,6 @@ export const Header = () => {
   const { loggedInUser } = useContext(UserContext);
 
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   return (
     <div className="relative top-0 left-0 w-full py-5 px-10 flex justify-between items-center border border-black">
