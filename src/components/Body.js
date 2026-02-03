@@ -30,6 +30,7 @@ const Body = () => {
     <div className="w-full">
       <div className="p-[2%]">
         <input
+          data-testid="search-input"
           className="border border-gray-300"
           value={searchText}
           onChange={(e) => {
