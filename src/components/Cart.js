@@ -33,6 +33,7 @@ const Cart = () => {
           <div>
             {cartItems.map((i) => (
               <div
+                data-testid="cartitem"
                 key={i?.card?.info?.id}
                 className="p-2 m-2 border-gray-200 border-b-2 text-left"
               >
